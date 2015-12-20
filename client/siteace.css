@@ -1,0 +1,44 @@
+/* CSS declarations go here */
+body {
+    padding-top: 70px;
+}
+
+.hidden_div{
+	display:none;
+}
+
+.login-buttons {
+    margin-top: 16px;
+}
+
+a.title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+#comments_section {
+    margin-top: 20px;
+}
+
+.comment {
+    border-bottom: 1px solid #eeeeee;
+    padding-top: 25px;
+    padding-bottom: 10px;
+}
+
+ol li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+ol li:nth-child(odd) {
+  background-color: #eeeeee;
+}
+ol li:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.js-website-comment {
+    margin-top: 10px;
+}

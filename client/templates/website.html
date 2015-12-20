@@ -1,0 +1,37 @@
+<template name="website">
+    <div class="container">
+        <a class="title" href="{{url}}">{{title}}</a>
+        
+        <p class="help-block">
+            Created on: <span>{{createdOn}}</span>
+        </p>
+
+        <p>
+            <strong>Description:</strong> {{description}}
+        </p>
+        
+        <a href="#" class="btn btn-danger js-downvote">
+            Down votes: {{downVotes}} <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        </a>
+
+        <a href="#" class="btn btn-success js-upvote">
+            Up votes: {{upVotes}} <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </a>
+        
+        <form class="js-add-comment">
+            <label for="comment">Add your comment here:</label>
+            <textarea name="comment" class="form-control" rows="3"></textarea>
+            <button class="btn btn-primary" type="submit">Add Comment</button>
+        </form>
+
+        <div id="comments_section">
+            {{#each comments}}
+               <div class="comment">
+                   <strong>{{author.email}}</strong> - {{createdOn}}
+                   <br><br>
+                   {{content}}
+               </div>
+           {{/each}}
+        </div>
+    </div>
+</template>

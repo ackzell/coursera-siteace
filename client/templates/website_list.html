@@ -1,0 +1,11 @@
+<!-- template that displays several website items -->
+<template name="website_list">
+   <div class="container">
+        {{> website_form}}
+        <ol>
+           {{#each websites}}
+               <li>{{> website_item}}</li>
+           {{/each}}
+       </ol>
+   </div>
+</template>
