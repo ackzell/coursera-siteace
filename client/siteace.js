@@ -4,18 +4,34 @@
 
 // helper function that returns all available websites
 Template.website_list.helpers({
+    // websites: function() {
+    //     return Websites.find({}, {
+    //         sort: {
+    //             upVotes: -1
+    //         }
+    //     });
+    // }
     websites: function() {
-        return Websites.find({}, {
-            sort: {
-                upVotes: -1
-            }
-        });
+        if (Session.get('searchQuery')) {
+            return  WebsitesIndex.search(Session.get('searchQuery')).fetch().sort({upVotes: -1});
+        } else {
+            return Websites.find({}, {
+                sort: {upVotes: -1}
+            });
+        }
     }
 });
 
 /////
 // template events 
 /////
+
+Template.searchBox.events({
+    'keyup #search-box': _.throttle(function (event) {
+        var text = $('#search-box').val();
+        Session.set('searchQuery', text);
+    }, 200)
+});
 
 Template.website_item.events({
     "click .js-upvote": function(event) {
@@ -56,6 +72,41 @@ Template.website_item.events({
 });
 
 Template.website.events({
+    "click .js-upvote": function(event) {
+        // example of how you can access the id for the website in the database
+        // (this is the data context for the template)
+        var website_id = this._id;
+        //console.log("Up voting website with id " + website_id);
+
+        Websites.update({
+                _id: website_id
+            }, {
+                $inc: {
+                    upVotes: 1
+                }
+            },
+            function(err, res) {});
+
+        return false; // prevent the button from reloading the page
+    },
+    "click .js-downvote": function(event) {
+
+        // example of how you can access the id for the website in the database
+        // (this is the data context for the template)
+        var website_id = this._id;
+        // console.log("Down voting website with id " + website_id);
+
+        Websites.update({
+                _id: website_id
+            }, {
+                $inc: {
+                    downVotes: 1
+                }
+            },
+            function(err, res) {});
+
+        return false; // prevent the button from reloading the page
+    },
     'submit .js-add-comment': function(event) {
 
         var userEmail = Meteor.users.findOne({
@@ -134,6 +185,8 @@ Template.website_form.events({
                 event.target.description.value = '';
                 event.target.title.value = '';
                 event.target.url.value = '';
+                Session.set('urlVal', '');
+                Session.set('descriptionVal', '');
             });
         }
 
@@ -150,3 +203,12 @@ Template.website_form.helpers({
         return !(Session.get('urlVal') && Session.get('descriptionVal'));
     }
 });
+
+/// Search functionality
+
+// Tracker.autorun(function () {
+//   var cursor = WebsitesIndex.search('course'); // search all docs that contain "Marie" in the name or score field
+
+//   console.log(cursor.fetch()); // log found documents with default search limit
+//   console.log(cursor.count()); // log count of all found documents
+// });

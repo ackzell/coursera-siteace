@@ -2,6 +2,8 @@
 <template name="website_list">
    <div class="container">
         {{> website_form}}
+
+        {{> searchBox}}
         <ol>
            {{#each websites}}
                <li>{{> website_item}}</li>

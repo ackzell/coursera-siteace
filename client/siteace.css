@@ -42,3 +42,17 @@ ol li:nth-child(even) {
 .js-website-comment {
     margin-top: 10px;
 }
+
+#search-template {
+    margin: 10px auto;
+}
+
+.search-result {
+    background: yellow;
+}
+
+#search-box {
+    width: 100%;
+    border-radius: 5px;
+    font-size: 2em;
+}
