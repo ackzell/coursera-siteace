@@ -1,7 +1,11 @@
 <!-- template that displays individual website entries -->
 <template name="website_item">
 
-        <a class="title" href="{{url}}">{{{title}}}</a> - <a href="/website/{{_id}}"><em>details</em></a>
+        <a class="title" href="{{url}}">{{{title}}}</a> - <a href="/website/{{_id}}">
+            {{#if currentUser}}
+                <em>details</em>
+            {{/if}}
+        </a>
         
         <p class="help-block">
             Created on: <span>{{createdOn}}</span>

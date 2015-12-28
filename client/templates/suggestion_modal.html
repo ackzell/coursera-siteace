@@ -1,0 +1,36 @@
+<template name="suggested_sites">
+    <div class="modal fade" id="suggested_sites">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <h5>You may also like:</h5>
+                    </div>
+                    <div class="modal-body">
+                        Suggestions based on: 
+                        {{#each terms}}
+                            <em>"{{term}}"</em>
+                        {{/each}}
+                        <ul>
+                            {{#if websites}}
+                                {{#each websites}}
+                                    <li><a href="/website/{{_id}}" class="js-show-detail">{{{title}}}</a>
+                                    <br>
+                                    {{{description}}}
+                                    </li>
+                                {{/each}}
+                            {{else}}
+                                Sorry, no suggestions for now.
+                            {{/if}}
+                            
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-warning">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
